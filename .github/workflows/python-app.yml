@@ -34,4 +34,14 @@ jobs:
     - name: Run Integrate.AI
       run: |
         python IntegrateAI.py
+    - name: Make Directory for Artifacts
+      run: mkdir artifact
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: /*.xml
+        path: artifacts
+        
+      
+    
         
