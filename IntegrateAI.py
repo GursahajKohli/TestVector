@@ -80,54 +80,6 @@ for jobs in job_links:
         reference = xml.SubElement(jobXml, 'reference')
         #reference.text = "1234"
 
-'''
-#Vector Bamboo
-
-r = requests.get('https://vectorinstitute.bamboohr.com/jobs/')
-print(r.status_code)
-html = r.text
-
-soup = BeautifulSoup(html, 'html.parser')
-
-for tag in soup.findAll('script', {'id' : 'positionData'}):
-    #print(tag.string.split("},{"))
-    obj = json.loads(tag.string)
-
-jobs = []
-for i in range(0, len(obj)):
-
-    if obj[i]['departmentLabel'] == 'AI Engineering & Technology':
-        jobs.append(obj[i])
-for job in jobs:
-
-    jobXml = Element('job')
-    root.append(jobXml)
-    jobTitle = xml.SubElement(jobXml, 'job_title')
-    jobTitle.text = job['jobOpeningName']
-
-    description = xml.SubElement(jobXml, 'description')
-    description.text = job_content
-
-    url = xml.SubElement(jobXml, 'url')
-    url.text = jobs
-
-    apply_email = xml.SubElement(jobXml, 'apply_email')
-
-    company = xml.SubElement(jobXml, 'company')
-    company.text = "integrate.ai"
-
-    company_url = xml.SubElement(jobXml, 'company_url')
-    company_url.text = "https://integrate.ai/"
-
-    city = xml.SubElement(jobXml, 'city')
-    city.text = str(job_location)
-
-    location = xml.SubElement(jobXml, 'location')
-    location.text = "Canada"
-
-    reference = xml.SubElement(jobXml, 'reference')
-    #reference.text = "1234"
-    '''
 
 
 print(xml1.tostring(root))
