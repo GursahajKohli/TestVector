@@ -39,8 +39,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: /*.xml
-        path: artifacts
+        name: Artifacts
+        path: Job_posts
         
       
     
