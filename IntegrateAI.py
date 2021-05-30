@@ -41,6 +41,7 @@ for jobs in job_links:
         job_location = job_soup.find('div', {'class' : 'location'}).string
         job_content = job_soup.find('div', {'id' : 'content'})
         job_content = str(job_content).replace('<div class="" id="content">', '').replace('</div>', '')
+        job_img = job_soup.find('img')['src']
         #print("Job title :: ", job_title)
         #print("Job location :: ", job_location)
         #print("Job contents :: ", job_content)
@@ -53,7 +54,10 @@ for jobs in job_links:
         print(job_title)
 
         description = xml.SubElement(jobXml, 'description')
-        description.text = job_content
+        description.text = '<html><body>'+job_content[1:-1]+'</body></head>'
+        
+        img = xml.SubElement(jobXml, 'job_img')
+        img.text = job_img
 
         url = xml.SubElement(jobXml, 'url')
         url.text = jobs
