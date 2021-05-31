@@ -54,6 +54,7 @@ for jobs in job_links:
         print(job_title)
 
         description = xml.SubElement(jobXml, 'description')
+        job_content = job_content.replace('\n','')
         description.text = '<html><body>'+job_content[1:-1]+'</body></head>'
         
         img = xml.SubElement(jobXml, 'job_img')
