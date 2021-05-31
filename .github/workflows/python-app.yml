@@ -23,7 +23,7 @@ jobs:
     - name: Remove existing XMLs
       uses: JesseTG/rm@v1.0.2
       with:
-         path: Job_posts.xml 
+         path: ./.*xml
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
