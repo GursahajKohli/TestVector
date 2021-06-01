@@ -81,12 +81,71 @@ for jobs in job_links:
         reference = xml.SubElement(jobXml, 'reference')
         #reference.text = "1234"
 
+r = requests.get('https://www.canvass.io/careers')
+html = r.text
 
+#print(html)
+
+soup = BeautifulSoup(html, 'html.parser')
+i = 0
+job_links = []
+company_link = "https://www.canvass.io"
+for tags in soup.findAll('a', {'class' : 'job-listing-card w-inline-block'}):
+
+    job_links.append(company_link + tags['href'])
+
+for jobs in job_links:
+
+    job_request = requests.get(jobs)
+    job_html = job_request.text
+    job_soup = BeautifulSoup(job_html, 'html.parser')
+
+    job_title = job_soup.find('h1', {'class' : 'page-title-2 section-header'}).string
+    job_location = job_soup.find('div', {'class' : 'job-listing-info-text'}).string
+    job_content = str(job_soup.find('div', {'class' : 'project-rich-text w-richtext'})).replace("Â", '').replace('â', '').replace('â', "")
+    job_c = job_content.encode("utf-8")
+
+    #print(job_c)
+    input()
+    #job_content = re.sub('Ã¢Â€Â¢\t', '', job_content) .replace('Ã¢Â€Â¢\tWe', 'We').replace('Â·Â Â Â', '').replace('Â', '').replace('â', '').replace('¢\t', '')
+    print(job_content)
+
+    job_content = '<html><body>' + job_content + '</body></html>'
+    job_img = job_soup.find('img', {'class' : 'logo'})['src']
+
+    jobXml = Element('job')
+    root.append(jobXml)
+
+    jobTitle = xml.SubElement(jobXml, 'job_title')
+    jobTitle.text = job_title
+
+    description = xml.SubElement(jobXml, 'description')
+    description.text = job_content
+
+    url = xml.SubElement(jobXml, 'url')
+    url.text = jobs
+    print(jobs)
+
+    apply_email = xml.SubElement(jobXml, 'apply_email')
+    apply_email.text = 'info@canvass.io'
+
+    company = xml.SubElement(jobXml, 'company')
+    company.text = "CANVASS"
+
+    company_url = xml.SubElement(jobXml, 'company_url')
+    company_url.text = "https://www.canvass.io/"
+
+    city = xml.SubElement(jobXml, 'city')
+    city.text = str(job_location.strip())
+
+    location = xml.SubElement(jobXml, 'location')
+    location.text = "Canada"
+
+    reference = xml.SubElement(jobXml, 'reference')
 
 print(xml1.tostring(root))
 file_obj = open("Job_posts.xml", "w+")
 file_obj.write(str(xml1.tostring(root))[2:-1])
 
 print("Done!")
-
 
