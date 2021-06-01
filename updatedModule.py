@@ -12,6 +12,8 @@ import json
 r = requests.get('https://www.canvass.io/careers')
 html = r.text
 
+root = xml.Element('jobs')
+tree = xml.ElementTree(root)
 #print(html)
 
 soup = BeautifulSoup(html, 'html.parser')
@@ -87,9 +89,6 @@ job_links = []
 for opening in child:
     job_links.append(job_board+opening['href'])
 
-
-root = xml.Element('jobs')
-tree = xml.ElementTree(root)
 for jobs in job_links:
 
     job_request = requests.get(jobs)
