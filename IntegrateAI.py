@@ -105,8 +105,7 @@ for jobs in job_links:
     job_content = str(job_soup.find('div', {'class' : 'project-rich-text w-richtext'})).replace("Â", '').replace('â', '').replace('â', "")
     job_c = job_content.encode("utf-8")
 
-    #print(job_c)
-    input()
+    
     #job_content = re.sub('Ã¢Â€Â¢\t', '', job_content) .replace('Ã¢Â€Â¢\tWe', 'We').replace('Â·Â Â Â', '').replace('Â', '').replace('â', '').replace('¢\t', '')
     print(job_content)
 
