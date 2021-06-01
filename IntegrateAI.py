@@ -7,6 +7,9 @@ from xml.etree.ElementTree import Element
 
 import json
 
+root = xml.Element('jobs')
+tree = xml.ElementTree(root)
+
 #Integrate AI
 
 r = requests.get('https://www.canvass.io/careers')
@@ -86,10 +89,7 @@ job_board = 'https://boards.greenhouse.io'
 job_links = []
 for opening in child:
     job_links.append(job_board+opening['href'])
-
-
-root = xml.Element('jobs')
-tree = xml.ElementTree(root)
+    
 for jobs in job_links:
 
     job_request = requests.get(jobs)
