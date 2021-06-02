@@ -41,7 +41,7 @@ for jobs in job_links:
         job_title = job_soup.find('h1', {'class' : 'app-title'}).string
         job_location = job_soup.find('div', {'class' : 'location'}).string
         job_content = job_soup.find('div', {'id' : 'content'})
-        job_content = str(job_content).replace('<div class="" id="content">', '').replace('</div>', '')
+        job_content = str(job_content).replace('<div class="" id="content">', '').replace('</div>', '').replace('\n', '')
         job_img = job_soup.find('img')['src']
         print(job_img)
 
